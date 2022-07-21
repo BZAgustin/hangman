@@ -3,7 +3,7 @@
 # module containing messages to display in-game
 module Display
   def welcome
-    <<-HEREDOC
+    <<-WELCOME
     ---------- HANGMAN ----------
 
     Welcome to Hangman! Your objective is to guess the secret word based on the character placeholders shown on screen.
@@ -14,6 +14,19 @@ module Display
 
     -----------------------------
 
-    HEREDOC
+    WELCOME
+  end
+
+  def show_guess(guess, good, bad)
+    puts "\n\n\n"
+    print 'WORD | '
+    guess.each { |letter| print "#{letter} " }
+    print "\n\n"
+    print 'GOOD | '
+    good.each { |letter| print "#{letter} " }
+    print "\n\n"
+    print 'BAD  | '
+    bad.each { |letter| print "#{letter} " }
+    print "\n\n"
   end
 end
