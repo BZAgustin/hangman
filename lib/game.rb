@@ -28,7 +28,7 @@ class Game
   end
 
   def set_word
-    @word = select_random_word.split(//)[0..-2]
+    @word = select_random_word.upcase.split(//)[0..-2]
     @guess = Array.new(word.length, '_')
   end
 
@@ -45,7 +45,7 @@ class Game
   def read_player_letter
     print 'Enter a letter: '
     input = gets.chomp
-    return input.downcase if valid?(input)
+    return input.upcase if valid?(input)
 
     puts 'Invalid input! Must be a single letter'
     read_player_letter
