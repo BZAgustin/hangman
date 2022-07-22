@@ -33,9 +33,9 @@ class Game
   end
 
   def player_continue?
-    input = gets.chomp.downcase
+    input = gets.chomp
 
-    input != 'q'
+    input.downcase != 'q'
   end
 
   def select_random_word
