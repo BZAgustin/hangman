@@ -15,18 +15,17 @@ module Display
 
     -----------------------------
 
+    # Press Enter or type anything to play. Type 'q' to quit
+
+
     WELCOME
   end
 
   # different prompts based on whether 'saves' folder has files or not
   def new_game_message
-    if Dir.empty?('saves')
-      puts '# Press Enter or type anything to play. Type \'q\' to quit'
-    else
-      puts '# Press Enter or type anything to play'
-      puts '# Type \'load\' to load a previous game'
-      puts "# Type 'q' to quit\n\n"
-    end
+    return unless Dir.exist?('saves') && !Dir.empty?('saves')
+
+    puts '# Type \'load\' to load a previous game'
   end
 
   # displays list of available saves
