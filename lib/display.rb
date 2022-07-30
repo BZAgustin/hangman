@@ -2,6 +2,7 @@
 
 # module containing messages to display in-game
 module Display
+  # first message that appears when running the program
   def welcome
     <<-WELCOME
     ---------- HANGMAN ----------
@@ -10,23 +11,43 @@ module Display
 
     The catch is, you can only guess one letter at a time and you're allowed 6 incorrect guesses before you lose.
 
-    GLHF. Press any key to play, or 'q' to quit.
+    GLHF.
 
     -----------------------------
 
     WELCOME
   end
 
-  def show_guess(guess, good, bad)
-    puts "\n\n\n"
-    print 'WORD | '
+  # different prompts based on whether 'saves' folder has files or not
+  def new_game_message
+    if Dir.empty?('saves')
+      puts '# Press Enter or type anything to play. Type \'q\' to quit'
+    else
+      puts '# Press Enter or type anything to play'
+      puts '# Type \'load\' to load a previous game'
+      puts "# Type 'q' to quit\n\n"
+    end
+  end
+
+  # displays list of available saves
+  def show_saves
+    count = 1
+    Dir.foreach('saves') do |filename|
+      unless %w[. ..].include?(filename)
+        puts "#{count} - #{filename}"
+        count += 1
+      end
+    end
+  end
+
+  # displays current word state, good and bad guesses, and attempts left
+  def show_guess(guess, good, bad, attempts)
+    print "\n\n\nWORD | "
     guess.each { |letter| print "#{letter} " }
-    print "\n\n"
-    print 'GOOD | '
+    print "\n\nGOOD | "
     good.each { |letter| print "#{letter} " }
-    print "\n\n"
-    print 'BAD  | '
+    print "\n\nBAD  | "
     bad.each { |letter| print "#{letter} " }
-    print "\n\n"
+    print "\n\nLIVES | #{attempts}\n\n\n"
   end
 end
